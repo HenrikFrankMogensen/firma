@@ -14,7 +14,7 @@ const scene = new THREE.Scene()
 let bee
 let mixer
 const gltfLoader = new GLTFLoader()
-gltfLoader.load('../../3DModel/demon_bee_full_texture.glb', (gltf) => {
+gltfLoader.load('./3dModel/demon_bee_full_texture.glb', (gltf) => {
   bee = gltf.scene
   bee.rotation.y = 1
   bee.scale.set(0.8, 0.8, 0.8)
