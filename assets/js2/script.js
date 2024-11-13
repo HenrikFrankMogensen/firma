@@ -2,12 +2,12 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js'
 
 const camera = new THREE.PerspectiveCamera(
-  10,
+  50,
   window.innerWidth / 500,
   0.1,
   1000
 )
-camera.position.set(0, 0, 13)
+camera.position.set(0, 0, 2.5)
 
 const scene = new THREE.Scene()
 
