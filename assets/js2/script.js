@@ -47,7 +47,7 @@ const reRender3D = () => {
 reRender3D()
 
 window.addEventListener('resize', () => {
-  renderer.setSize(window.innerWidth, 500)
-  camera.aspect = window.innerWidth / 500
+  renderer.setSize(window.outerWidth, 500)
+  camera.aspect = window.outerWidth / 500
   camera.updateProjectionMatrix()
 })
