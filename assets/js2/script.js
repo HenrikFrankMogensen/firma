@@ -46,40 +46,6 @@ const reRender3D = () => {
 }
 reRender3D()
 
-let isPinchZooming = false;
-
-// Forhindre zoom via pincet-bevægelse (touch events)
-window.addEventListener('touchstart', function (event) {
-  if (event.touches.length > 1) {
-    isPinchZooming = true;
-    event.preventDefault();  // Forhindrer zoom ved touch
-  }
-}, { passive: false });
-
-window.addEventListener('touchmove', function (event) {
-  if (isPinchZooming) {
-    event.preventDefault();  // Forhindrer zoom ved touch
-  }
-}, { passive: false });
-
-window.addEventListener('touchend', function (event) {
-  if (event.touches.length <= 1) {
-    isPinchZooming = false;  // Stopper zoom når der kun er én finger
-  }
-}, { passive: false });
-
-// Forhindre zoom via musens scrollhjul (wheel event) – men tillad normal scroll
-window.addEventListener('wheel', function (event) {
-  // Hvis scrollhjulet bruges til zooming (zoom ind eller ud), forhindrer vi det
-  if (event.ctrlKey || event.metaKey) {
-    // Hvis ctrl eller meta (cmd) er nede, betyder det zoom
-    event.preventDefault();  // Forhindrer zoom
-  } else {
-    // Tillader normal scroll
-    return;
-  }
-}, { passive: false });
-
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, 500)
   camera.aspect = window.innerWidth / 500
