@@ -51,3 +51,10 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / 500
   camera.updateProjectionMatrix()
 })
+
+// Forhindre zoom via touch (pincet-bevægelse)
+window.addEventListener('touchmove', function (event) {
+  if (event.scale !== 1) {
+    event.preventDefault();  // Forhindrer zoom
+  }
+}, { passive: false });
