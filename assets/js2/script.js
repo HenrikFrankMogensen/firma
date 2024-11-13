@@ -26,7 +26,7 @@ gltfLoader.load('./3dModel/demon_bee_full_texture.glb', (gltf) => {
 
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
-  antialies: true
+  antialias: true
 })
 renderer.setSize(window.innerWidth, 500)
 const canvas = document.getElementById('container3D').appendChild(renderer.domElement)
