@@ -46,31 +46,42 @@ const reRender3D = () => {
 }
 reRender3D()
 
+let isPinchZooming = false;
+
+// Forhindre zoom via pincet-bevægelse (touch events)
+window.addEventListener('touchstart', function (event) {
+  if (event.touches.length > 1) {
+    isPinchZooming = true;
+    event.preventDefault();  // Forhindrer zoom ved touch
+  }
+}, { passive: false });
+
+window.addEventListener('touchmove', function (event) {
+  if (isPinchZooming) {
+    event.preventDefault();  // Forhindrer zoom ved touch
+  }
+}, { passive: false });
+
+window.addEventListener('touchend', function (event) {
+  if (event.touches.length <= 1) {
+    isPinchZooming = false;  // Stopper zoom når der kun er én finger
+  }
+}, { passive: false });
+
+// Forhindre zoom via musens scrollhjul (wheel event) – men tillad normal scroll
+window.addEventListener('wheel', function (event) {
+  // Hvis scrollhjulet bruges til zooming (zoom ind eller ud), forhindrer vi det
+  if (event.ctrlKey || event.metaKey) {
+    // Hvis ctrl eller meta (cmd) er nede, betyder det zoom
+    event.preventDefault();  // Forhindrer zoom
+  } else {
+    // Tillader normal scroll
+    return;
+  }
+}, { passive: false });
+
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, 500)
   camera.aspect = window.innerWidth / 500
   camera.updateProjectionMatrix()
 })
-
-let isPinchZooming = false;
-
-window.addEventListener('touchstart', function (event) {
-  // Hvis der er to eller flere fingre, starter vi zoom-sessionen
-  if (event.touches.length > 1) {
-    isPinchZooming = true;
-  }
-}, { passive: false });
-
-window.addEventListener('touchmove', function (event) {
-  // Hvis vi er i gang med at zoom, forhindrer vi eventen
-  if (isPinchZooming) {
-    event.preventDefault();  // Forhindrer zoom
-  }
-}, { passive: false });
-
-window.addEventListener('touchend', function (event) {
-  // Stop zooming når fingrene er løftet
-  if (event.touches.length <= 1) {
-    isPinchZooming = false;
-  }
-}, { passive: false });
