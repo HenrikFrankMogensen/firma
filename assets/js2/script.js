@@ -52,9 +52,25 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix()
 })
 
-// Forhindre zoom via touch (pincet-bevægelse)
+let isPinchZooming = false;
+
+window.addEventListener('touchstart', function (event) {
+  // Hvis der er to eller flere fingre, starter vi zoom-sessionen
+  if (event.touches.length > 1) {
+    isPinchZooming = true;
+  }
+}, { passive: false });
+
 window.addEventListener('touchmove', function (event) {
-  if (event.scale !== 1) {
+  // Hvis vi er i gang med at zoom, forhindrer vi eventen
+  if (isPinchZooming) {
     event.preventDefault();  // Forhindrer zoom
+  }
+}, { passive: false });
+
+window.addEventListener('touchend', function (event) {
+  // Stop zooming når fingrene er løftet
+  if (event.touches.length <= 1) {
+    isPinchZooming = false;
   }
 }, { passive: false });
