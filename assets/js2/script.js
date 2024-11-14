@@ -36,7 +36,36 @@ const topLight = new THREE.DirectionalLight(0xffffff, 1)
 topLight.position.set(500, 500, 500)
 scene.add(topLight)
 
-const reRender3D = () => {
+// Opret en clock til at holde styr på tid
+const clock = new THREE.Clock()
+let tick1 = true
+
+// Animering
+const animate = () => {
+  // Beregn tiden mellem frames
+  const delta = clock.getDelta() // Tidsdifferens (sekunder) siden sidste frame
+
+  if (mixer) {
+    // Opdater animationen med den tidsdifferens
+    mixer.update(delta) // Her er delta uafhængig af FPS
+  }
+
+  if (bee && tick1) {
+    bee.position.set(0, -1, 0)
+    tick1 = false
+  }
+
+  // Anmod om næste frame
+  window.requestAnimationFrame(animate)
+
+  // Render scenen
+  renderer.render(scene, camera);
+}
+
+// Start animation
+animate();
+
+/* const reRender3D = () => {
   requestAnimationFrame(reRender3D)
   renderer.render(scene, camera)
   if (mixer) mixer.update(0.02)
@@ -44,7 +73,7 @@ const reRender3D = () => {
     bee.position.set(0, -1, 0)
   }
 }
-reRender3D()
+reRender3D() */
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.outerWidth, 500)
