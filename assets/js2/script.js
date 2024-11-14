@@ -36,19 +36,14 @@ const topLight = new THREE.DirectionalLight(0xffffff, 1)
 topLight.position.set(500, 500, 500)
 scene.add(topLight)
 
-let lastTime = 0;
-const reRender3D = (time) => {
-  requestAnimationFrame(reRender3D);
-
-  const deltaTime = (time - lastTime) / 1000 // Convert to seconds
-  lastTime = time
-  if (mixer) mixer.update(deltaTime)
+const reRender3D = () => {
+  requestAnimationFrame(reRender3D)
+  renderer.render(scene, camera)
+  if (mixer) mixer.update(0.02)
   if (bee) {
     bee.position.set(0, -1, 0)
   }
-  renderer.render(scene, camera)
 }
-
 reRender3D()
 
 window.addEventListener('resize', () => {
