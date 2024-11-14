@@ -41,7 +41,6 @@ const reRender3D = (time) => {
   requestAnimationFrame(reRender3D);
 
   const deltaTime = (time - lastTime) / 1000 // Convert to seconds
-  console.log(deltaTime)
   lastTime = time
   if (mixer) mixer.update(deltaTime)
   if (bee) {
