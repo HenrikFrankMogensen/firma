@@ -101,8 +101,8 @@ window.addEventListener('touchmove', (event) => {
   // For at få den første berøring
   let touch = event.touches[0];
   //console.log('Touch move at: ', touch.clientX, touch.clientY);
-  mouse.x = touch.clientX
-  mouse.y = touch.clientY
+  mouse.x = (touch.clientX / window.innerWidth) * 2 - 1
+  mouse.y = (touch.clientY / window.innerHeight) * 1.5 - 0.75
 
   // Brug lerp for at få en glidende bevægelse
   currentMouse.lerp(mouse, smoothing)
