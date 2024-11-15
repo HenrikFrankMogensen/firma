@@ -104,7 +104,6 @@ document.addEventListener('touchmove', function (event) {
   mouse.x = touch.clientX
   mouse.y = touch.clientY
   // For at forhindre standardadfærd (som f.eks. scrolling på touch-enheder)
-  event.preventDefault();
 }, { passive: false }); // `passive: false` tillader event.preventDefault() at blive kaldt
 
 window.addEventListener('resize', () => {
