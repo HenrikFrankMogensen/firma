@@ -17,7 +17,7 @@ const gltfLoader = new GLTFLoader()
 gltfLoader.load('./3dModel/demon_bee_full_texture.glb', (gltf) => {
   bee = gltf.scene
   bee.rotation.y = 1
-  bee.scale.set(0.8, 0.8, 0.8)
+  bee.scale.set(0.7, 0.7, 0.7)
   scene.add(gltf.scene)
 
   mixer = new THREE.AnimationMixer(bee)
@@ -39,6 +39,9 @@ scene.add(topLight)
 // Opret en clock til at holde styr på tid
 const clock = new THREE.Clock()
 let tick1 = true
+let mouse = new THREE.Vector2(); // This will hold the mouse coordinates
+let currentMouse = new THREE.Vector2(); // This will hold the mouse coordinates
+let smoothing = 0.3; // Glidende faktor (jo lavere, jo langsommere bevægelse)
 
 // Animering
 const animate = () => {
@@ -51,8 +54,14 @@ const animate = () => {
   }
 
   if (bee && tick1) {
-    bee.position.set(0, -1, 0)
+    bee.position.set(-0.08, -1, 0)
     tick1 = false
+  }
+
+  // Bruger mouse.x til at vende bi efter hvor der clickes
+  if (bee) {
+    bee.rotation.y = currentMouse.x * (window.innerWidth / 500) * 0.4
+    bee.rotation.x = currentMouse.y
   }
 
   // Anmod om næste frame
@@ -74,6 +83,23 @@ animate();
   }
 }
 reRender3D() */
+
+// Event listener to update mouse position
+window.addEventListener('mousemove', (event) => {
+  // Get mouse position in pixel coordinates
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = (event.clientY / window.innerHeight) * 1.5 - 0.75;
+  // At top of the screen mouse.y is +1 and at the bottom -1
+  // At left of the screen mouse.x is -1 og at left +1
+
+  // Brug lerp for at få en glidende bevægelse
+  currentMouse.lerp(mouse, smoothing)
+})
+
+// Event listener to update mouse position
+window.addEventListener('click', (event) => {
+  console.log('clicked')
+});
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.outerWidth, 500)
