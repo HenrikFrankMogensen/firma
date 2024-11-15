@@ -103,8 +103,10 @@ window.addEventListener('touchmove', (event) => {
   //console.log('Touch move at: ', touch.clientX, touch.clientY);
   mouse.x = touch.clientX
   mouse.y = touch.clientY
-  // For at forhindre standardadfærd (som f.eks. scrolling på touch-enheder)
-}); // `passive: false` tillader event.preventDefault() at blive kaldt
+
+  // Brug lerp for at få en glidende bevægelse
+  currentMouse.lerp(mouse, smoothing)
+})
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.outerWidth, 500)
