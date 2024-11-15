@@ -100,11 +100,11 @@ window.addEventListener('mousemove', (event) => {
 document.addEventListener('touchmove', function (event) {
   // For at få den første berøring
   let touch = event.touches[0];
-  console.log('Touch move at: ', touch.clientX, touch.clientY);
+  //console.log('Touch move at: ', touch.clientX, touch.clientY);
   mouse.x = touch.clientX
   mouse.y = touch.clientY
   // For at forhindre standardadfærd (som f.eks. scrolling på touch-enheder)
-}, { passive: false }); // `passive: false` tillader event.preventDefault() at blive kaldt
+}); // `passive: false` tillader event.preventDefault() at blive kaldt
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.outerWidth, 500)
