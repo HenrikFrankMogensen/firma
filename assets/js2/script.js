@@ -97,7 +97,7 @@ window.addEventListener('mousemove', (event) => {
 })
 
 // For touchskærm
-document.addEventListener('touchmove', function (event) {
+window.addEventListener('touchmove', (event) => {
   // For at få den første berøring
   let touch = event.touches[0];
   //console.log('Touch move at: ', touch.clientX, touch.clientY);
