@@ -54,7 +54,7 @@ const animate = () => {
   }
 
   if (bee && tick1) {
-    bee.position.set(-0.08, -0.6, 0)
+    bee.position.set(-0.08, -0.55, 0)
     tick1 = false
   }
 
