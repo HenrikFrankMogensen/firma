@@ -84,7 +84,7 @@ animate();
 }
 reRender3D() */
 
-// Event listener to update mouse position
+/* // Event listener to update mouse position
 window.addEventListener('mousemove', (event) => {
   // Get mouse position in pixel coordinates
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -94,7 +94,7 @@ window.addEventListener('mousemove', (event) => {
 
   // Brug lerp for at få en glidende bevægelse
   currentMouse.lerp(mouse, smoothing)
-})
+}) */
 
 window.addEventListener('touchstart', (event) => {
   // For at få den første berøring
