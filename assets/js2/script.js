@@ -74,27 +74,22 @@ const animate = () => {
 // Start animation
 animate();
 
-/* const reRender3D = () => {
-  requestAnimationFrame(reRender3D)
-  renderer.render(scene, camera)
-  if (mixer) mixer.update(0.02)
-  if (bee) {
-    bee.position.set(0, -1, 0)
-  }
+// Detect if it's a touch device
+var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// Event listener to update mouse position
+if (!isTouchDevice) {
+  window.addEventListener('mousemove', (event) => {
+    // Get mouse position in pixel coordinates
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = (event.clientY / window.innerHeight) * 1.5 - 0.75;
+    // At top of the screen mouse.y is +1 and at the bottom -1
+    // At left of the screen mouse.x is -1 og at left +1
+
+    // Brug lerp for at få en glidende bevægelse
+    currentMouse.lerp(mouse, smoothing)
+  })
 }
-reRender3D() */
-
-/* // Event listener to update mouse position
-window.addEventListener('mousemove', (event) => {
-  // Get mouse position in pixel coordinates
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = (event.clientY / window.innerHeight) * 1.5 - 0.75;
-  // At top of the screen mouse.y is +1 and at the bottom -1
-  // At left of the screen mouse.x is -1 og at left +1
-
-  // Brug lerp for at få en glidende bevægelse
-  currentMouse.lerp(mouse, smoothing)
-}) */
 
 // For touchskærm
 window.addEventListener('touchmove', (event) => {
